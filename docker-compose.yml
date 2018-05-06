@@ -7,3 +7,5 @@ services:
     privileged: true
     volumes:
       - "./extention:/extention"
+    ports:
+      - 35729:35729
