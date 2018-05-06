@@ -1,0 +1,9 @@
+
+version: "3"
+services: 
+  extention:
+    build:
+      context: ./extention/
+    privileged: true
+    volumes:
+      - "./extention:/extention"
