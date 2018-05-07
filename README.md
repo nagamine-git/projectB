@@ -4,12 +4,10 @@
 ```bash
 # ビルド
 docker-compose build
-# bashに入る
-docker-compose run -p 35729:35729 extention bash
-#  ディレクトリに移動してnpm install
-cd hogehoge (&& npm install)
-# 拡張機能の自動ビルド
-npm run dev:chrome
+# 初回だけnpm install
+docker-compose run extention npm install
+# 起動・自動ビルド
+docker-compose up
 ```
 
 2. <chrome://extensions/>へアクセス
