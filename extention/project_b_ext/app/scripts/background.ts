@@ -9,4 +9,12 @@ chrome.browserAction.setBadgeText({
   text: `'Allo`
 });
 
+chrome.runtime.onMessage.addListener(
+	function(request,sender,sendResponse) {
+    console.log(request);
+    let res = (request);
+		sendResponse(res);
+  }
+);
+
 console.log(`'Allo 'Allo! Event Page for Browser Action`);
