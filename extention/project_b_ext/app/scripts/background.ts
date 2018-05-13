@@ -9,11 +9,13 @@ chrome.browserAction.setBadgeText({
   text: `'Allo`
 });
 
+let actions = <any>[]
+
 chrome.runtime.onMessage.addListener(
 	function(request,sender,sendResponse) {
     console.log(request);
-    let res = (request);
-		sendResponse(res);
+    actions.push(request);
+		sendResponse(actions);
   }
 );
 

@@ -6,21 +6,8 @@
 // $extension.src = chrome.extension.getURL('pages/sidebar.html');
 // document.body.appendChild($extension); 
 
-let last_location = '';
-
 document.addEventListener('click', (e) => {
     // e.target: イベント発生源
-    let current_location = location.href;
-    if (last_location !== location.href) {
-        last_location = location.href;
-        console.log(location.href);
-        chrome.runtime.sendMessage({'アクセス': location.href},
-        function(response){
-            console.log("message sent");
-            console.log(response);
-            // document.getElementById('page-top').innerHTML = String(response);
-        });
-    }
     let last_node = '';
     if (e.path[0].innerText) {
         last_node = String(e.path[0].innerText)
@@ -32,8 +19,22 @@ document.addEventListener('click', (e) => {
     }
     chrome.runtime.sendMessage({'クリック': last_node},
     function(response){
-        console.log("message sent");
         console.log(response);
-        // document.getElementById('page-top').innerHTML = String(response);
+            // document.getElementById('page-top').innerHTML = String(response);
     });
 }, false);
+
+let last_location = '';
+
+window.onload = function(){
+    let current_location = location.href;
+    if (last_location !== location.href) {
+        last_location = location.href;
+        console.log(location.href);
+        chrome.runtime.sendMessage({'アクセス': location.href},
+        function(response){
+            console.log(response);
+            // document.getElementById('page-top').innerHTML = String(response);
+        });
+    }}
+    
