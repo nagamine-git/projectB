@@ -1,10 +1,10 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
-// const $extension = this.$extension = document.createElement('iframe');
-// $extension.id = 'prj_b_sidebar';
-// $extension.src = chrome.extension.getURL('pages/sidebar.html');
-// document.body.appendChild($extension); 
+let $extension = this.$extension = document.createElement('iframe');
+$extension.id = 'prj_b_sidebar';
+$extension.src = chrome.extension.getURL('pages/sidebar.html');
+document.body.appendChild($extension); 
 
 document.addEventListener('click', (e) => {
     // e.target: イベント発生源
@@ -19,8 +19,8 @@ document.addEventListener('click', (e) => {
     }
     chrome.runtime.sendMessage({'クリック': last_node},
     function(response){
-        console.log(response);
-            // document.getElementById('page-top').innerHTML = String(response);
+        console.log(response);            
+        // document.getElementById('page-top').innerHTML = String(response);
     });
 }, false);
 

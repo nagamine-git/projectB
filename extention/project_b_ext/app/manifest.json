@@ -40,9 +40,11 @@
   ],
   "permissions": [
     "clipboardRead",
-    "clipboardWrite"
+    "clipboardWrite",
+    "http://*/*", "https://*/*", "https://code.jquery.com/*"
   ],
   "web_accessible_resources": [
     "pages/sidebar.html"
-  ]
+  ],
+  "content_security_policy": "script-src 'self' https://code.jquery.com/; object-src 'self'"
 }
