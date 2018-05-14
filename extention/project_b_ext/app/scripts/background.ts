@@ -1,13 +1,7 @@
 // Enable chromereload by uncommenting this line:
 // import 'chromereload/devonly'
 
-chrome.runtime.onInstalled.addListener((details) => {
-  console.log('previousVersion', details.previousVersion);
-});
-
-chrome.browserAction.setBadgeText({
-  text: `'Allo`
-});
+// イベント一覧をactionsに保存しておく
 
 let actions = <any>[]
 
@@ -18,5 +12,3 @@ chrome.runtime.onMessage.addListener(
 		sendResponse(actions);
   }
 );
-
-console.log(`'Allo 'Allo! Event Page for Browser Action`);
