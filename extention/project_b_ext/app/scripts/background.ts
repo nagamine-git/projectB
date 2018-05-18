@@ -6,9 +6,12 @@
 let actions = <any>[]
 
 chrome.runtime.onMessage.addListener(
-	function(request,sender,sendResponse) {
+  function(request,sender,sendResponse) {
     console.log(request);
     actions.push(request);
-		sendResponse(actions);
+    if (request == 'deleteAll') {
+      actions = []
+    }
+    sendResponse(actions);
   }
 );
