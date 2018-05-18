@@ -2,10 +2,17 @@
 window.addEventListener('message', function(event) {
   let action_lists_dom = document.getElementById('action_lists');
   let action_lists_result = '';
+  let action_number = 0;
   for (action in event.data) {
     for (key in event.data[action]) {
-      action_lists_result += String('<b>' + key + ':</b><br>' + event.data[action][key] + '<br><br>')
+      action_lists_result += String(`
+      <p id="action_content_number_${String(action_number)}">
+        <b>${String(key)}:</b><button id="action_delete_number_${String(action_number)}" style="float:right;user-select:none;">X</button><br>
+        ${String(event.data[action][key])}
+      </p>
+      `)
     }
+    action_number ++;
   }
   action_lists_dom.innerHTML = action_lists_result;
 }, false);
