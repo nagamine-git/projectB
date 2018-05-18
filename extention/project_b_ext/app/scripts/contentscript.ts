@@ -17,6 +17,8 @@ document.addEventListener('click', (e) => {
     last_node = String(e.path[0].value)
   } else if (e.path[0].alt) {
     last_node = String(e.path[0].alt)
+  } else if (e.path[0].title) {
+    last_node = String(e.path[0].title)
   }
   // background.jsに送信
   chrome.runtime.sendMessage({'クリック': last_node},
