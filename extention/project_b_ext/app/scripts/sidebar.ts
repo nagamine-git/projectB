@@ -21,11 +21,30 @@ window.addEventListener('message', function(event) {
 document.addEventListener('click', (e) => {
   if (e.target.id == 'deleteAll') {
     // background.jsに送信
-    chrome.runtime.sendMessage('deleteAll',
+    chrome.runtime.sendMessage({'deleteAll':true},
     function(response){
       // 帰ってきたら、iframe内のsidebar.jsへ送信
       let action_lists_dom = document.getElementById('action_lists');
       action_lists_dom.innerHTML = '';
+    }); 
+  } else if (e.target.id.match(/action_delete_number_*/)) {
+    chrome.runtime.sendMessage({'delete':e.target.id.match(/\d+/)},
+    function(response){
+      let action_lists_dom = document.getElementById('action_lists');
+      let action_lists_result = '';
+      let action_number = 0;
+      for (action in response) {
+        for (key in response[action]) {
+          action_lists_result += String(`
+          <p id="action_content_number_${String(action_number)}">
+            <b>${String(key)}:</b><button id="action_delete_number_${String(action_number)}" style="float:right;user-select:none;">X</button><br>
+            ${String(response[action][key])}
+          </p>
+          `)
+        }
+        action_number ++;
+      }
+      action_lists_dom.innerHTML = action_lists_result;
     }); 
   }
 })

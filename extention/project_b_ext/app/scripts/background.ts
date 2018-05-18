@@ -7,10 +7,19 @@ let actions = <any>[]
 
 chrome.runtime.onMessage.addListener(
   function(request,sender,sendResponse) {
-    console.log(request);
-    actions.push(request);
-    if (request == 'deleteAll') {
-      actions = []
+    let action = Object.keys(request)[0];
+    switch (action) {
+      case 'deleteAll':
+        actions = [];
+        break;
+
+      case 'delete':
+        actions.splice(request[action], 1);
+        break;
+
+      default:
+        actions.push(request);
+        break;
     }
     sendResponse(actions);
   }
