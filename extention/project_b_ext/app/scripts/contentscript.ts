@@ -7,8 +7,7 @@ $extension.id = 'prj_b_sidebar';
 $extension.src = chrome.extension.getURL('pages/sidebar.html');
 document.body.appendChild($extension); 
 
-// クリック時の動作
-document.addEventListener('click', (e) => {
+document.addEventListener('mousedown', (e) => {
   // 末端のDOMの値を取得
   let last_node = '';
   if (e.path[0].innerText) {
@@ -21,13 +20,15 @@ document.addEventListener('click', (e) => {
     last_node = String(e.path[0].title)
   }
   // background.jsに送信
-  chrome.runtime.sendMessage({'クリック': last_node},
-  function(response){
-    // 帰ってきたら、iframe内のsidebar.jsへ送信
-    let sidebar_iframe = document.getElementById("prj_b_sidebar").contentWindow;
-    sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
-  });
-}, false);
+  if (last_node.length < 140 && last_node.length > 0) {
+    chrome.runtime.sendMessage({'クリック': last_node},
+    function(response){
+      // 帰ってきたら、iframe内のsidebar.jsへ送信
+      let sidebar_iframe = document.getElementById("prj_b_sidebar").contentWindow;
+      sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
+    });
+  }
+})
 
 // ページ遷移時の動作
 let last_location = '';
