@@ -7,7 +7,7 @@ $extension.id = 'prj_b_sidebar';
 $extension.src = chrome.extension.getURL('pages/sidebar.html');
 document.body.appendChild($extension); 
 
-document.addEventListener('mousedown', (e) => {
+document.addEventListener('mousedown', (e: any) => {
   // 末端のDOMの値を取得
   let last_node = '';
   if (e.path[0].innerText) {
