@@ -21,12 +21,7 @@ document.addEventListener('mousedown', (e) => {
   }
   // background.jsに送信
   if (last_node.length < 140 && last_node.length > 0) {
-    chrome.runtime.sendMessage({'クリック': last_node},
-    function(response){
-      // 帰ってきたら、iframe内のsidebar.jsへ送信
-      let sidebar_iframe = document.getElementById("prj_b_sidebar").contentWindow;
-      sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
-    });
+    chrome.runtime.sendMessage({'クリック': last_node}, sendIframeMessage);
   }
 })
 
@@ -37,11 +32,11 @@ window.onload = function(){
   if (last_location !== location.href) {
     last_location = location.href;
     // background.jsに送信
-    chrome.runtime.sendMessage({'アクセス': location.href},
-    function(response){
-      // 帰ってきたら、iframe内のsidebar.jsへ送信
-      let sidebar_iframe = document.getElementById("prj_b_sidebar").contentWindow;
-      sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
-    });
+    chrome.runtime.sendMessage({'アクセス': location.href}, sendIframeMessage);
   }
 }
+
+const sendIframeMessage = (response: any) => {
+  const sidebar_iframe = $extension.contentWindow;
+  if (sidebar_iframe) sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
+};
