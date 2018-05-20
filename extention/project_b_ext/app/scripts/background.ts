@@ -25,10 +25,9 @@ chrome.runtime.onMessage.addListener(
           let action_number = 0;
           for (let action in actions) {
             for (let key in actions[action]) {
-              action_lists_result += String(`
-              ${String(key)}:
-              ${String(actions[action][key])}
-              `)
+              if (key == 'クリック' || key == 'アクセス') {
+                action_lists_result += key + ':\n'+ actions[action][key] + '\n\n'                
+              }
             }
             action_number ++;
           }

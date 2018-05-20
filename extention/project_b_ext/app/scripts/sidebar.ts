@@ -7,7 +7,9 @@ window.addEventListener('message', function(event) {
     for (let key in event.data[action]) {
       action_lists_result += String(`
       <p id="action_content_number_${String(action_number)}">
-        <b>${String(key)}:</b><button id="action_delete_number_${String(action_number)}" style="float:right;user-select:none;">X</button><br>
+        <b>${String(key)}:</b>
+        <i class="fas fa-times-circle pjt_b_delete text-danger" id="action_delete_number_${String(action_number)}"></i>
+        <br>
         ${String(event.data[action][key])}
       </p>
       `)
@@ -27,7 +29,7 @@ document.addEventListener('click', (e: any) => {
       let action_lists_dom: any = document.getElementById('action_lists');
       action_lists_dom.innerHTML = '';
     }); 
-  } else if (e.target.id.match(/actionaction_lists_dom_delete_number_*/)) {
+  } else if (e.target.id.match(/action_delete_number_*/)) {
     chrome.runtime.sendMessage({'delete':e.target.id.match(/\d+/)},
     function(response){
       let action_lists_dom: any = document.getElementById('action_lists');
@@ -37,7 +39,9 @@ document.addEventListener('click', (e: any) => {
         for (let key in response[action]) {
           action_lists_result += String(`
           <p id="action_content_number_${String(action_number)}">
-            <b>${String(key)}:</b><button id="action_delete_number_${String(action_number)}" style="float:right;user-select:none;">X</button><br>
+            <b>${String(key)}:</b>    
+            <i class="fas fa-times-circle pjt_b_delete text-danger" id="action_delete_number_${String(action_number)}"></i>
+            <br>
             ${String(response[action][key])}
           </p>
           `)
