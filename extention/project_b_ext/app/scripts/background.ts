@@ -17,6 +17,26 @@ chrome.runtime.onMessage.addListener(
         actions.splice(request[action], 1);
         break;
 
+      case 'copyAll':
+          let textArea = document.createElement("textarea");
+          textArea.style.cssText = "position:absolute;left:-100%";
+          document.body.appendChild(textArea);
+          let action_lists_result = '';
+          let action_number = 0;
+          for (let action in actions) {
+            for (let key in actions[action]) {
+              action_lists_result += String(`
+              ${String(key)}:
+              ${String(actions[action][key])}
+              `)
+            }
+            action_number ++;
+          }
+          textArea.value = action_lists_result;
+          textArea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textArea);
+
       default:
         actions.push(request);
         break;

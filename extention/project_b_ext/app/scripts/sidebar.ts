@@ -46,5 +46,11 @@ document.addEventListener('click', (e: any) => {
       }
       action_lists_dom.innerHTML = action_lists_result;
     }); 
+  } else if (e.target.id == 'copyAll') {
+    chrome.runtime.sendMessage({'copyAll':true},
+    function(response){
+      // 帰ってきたら、iframe内のsidebar.jsへ送信
+      console.log('コピーが完了しました');
+    }); 
   }
 })
