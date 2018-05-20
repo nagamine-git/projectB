@@ -3,8 +3,8 @@ window.addEventListener('message', function(event) {
   let action_lists_dom = document.getElementById('action_lists');
   let action_lists_result = '';
   let action_number = 0;
-  for (action in event.data) {
-    for (key in event.data[action]) {
+  for (let action in event.data) {
+    for (let key in event.data[action]) {
       action_lists_result += String(`
       <p id="action_content_number_${String(action_number)}">
         <b>${String(key)}:</b><button id="action_delete_number_${String(action_number)}" style="float:right;user-select:none;">X</button><br>
@@ -33,8 +33,8 @@ document.addEventListener('click', (e) => {
       let action_lists_dom = document.getElementById('action_lists');
       let action_lists_result = '';
       let action_number = 0;
-      for (action in response) {
-        for (key in response[action]) {
+      for (let action in response) {
+        for (let key in response[action]) {
           action_lists_result += String(`
           <p id="action_content_number_${String(action_number)}">
             <b>${String(key)}:</b><button id="action_delete_number_${String(action_number)}" style="float:right;user-select:none;">X</button><br>
