@@ -34,14 +34,17 @@ chrome.runtime.onMessage.addListener(
             textArea.style.cssText = 'position:absolute;left:-100%';
             document.body.appendChild(textArea);
             let action_list_result = '';
-            let action_number = 0;
+            let action_number = 1;
             for (let action in actions) {
               for (let key in actions[action]) {
-                if (key === 'クリック' || key === 'アクセス') {
-                  action_list_result += key + ':\n' + actions[action][key] + '\n\n';
+                if (key  === 'アクセス') {
+                  action_list_result += action_number + '. 「' + actions[action][key] + '」にアクセス\n\n';
+                  action_number ++;
+                } else if (key === 'クリック') {
+                  action_list_result += action_number + '. 「' + actions[action][key] + '」をクリック\n\n';
+                  action_number ++;
                 }
               }
-              action_number ++;
             }
             textArea.value = action_list_result;
             textArea.select();
