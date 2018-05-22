@@ -8,37 +8,37 @@ $extension.scrolling = 'no';
 $extension.frameBorder = '0';
 $extension.src = chrome.extension.getURL('pages/sidebar.html');
 chrome.runtime.sendMessage({'active_status': true}, (res) => {
-  if(res) document.body.appendChild($extension);
-})
+  if (res) document.body.appendChild($extension);
+});
 
 document.addEventListener('mousedown', (e: any) => {
   // 末端のDOMの値を取得
   let last_node = '';
   if (e.path[0].innerText) {
-    last_node = String(e.path[0].innerText)
+    last_node = String(e.path[0].innerText);
   } else if (e.path[0].value) {
-    last_node = String(e.path[0].value)
+    last_node = String(e.path[0].value);
   } else if (e.path[0].alt) {
-    last_node = String(e.path[0].alt)
+    last_node = String(e.path[0].alt);
   } else if (e.path[0].title) {
-    last_node = String(e.path[0].title)
+    last_node = String(e.path[0].title);
   }
   // background.jsに送信
   if (last_node.length < 140 && last_node.length > 0) {
     chrome.runtime.sendMessage({'クリック': last_node}, sendIframeMessage);
   }
-})
+});
 
 // ページ遷移時の動作
 let last_location = '';
-window.onload = function(){
+window.onload = () => {
   let current_location = location.href;
   if (last_location !== location.href) {
     last_location = location.href;
     // background.jsに送信
     chrome.runtime.sendMessage({'アクセス': location.href}, sendIframeMessage);
   }
-}
+};
 
 const sendIframeMessage = (response: any) => {
   const sidebar_iframe = $extension.contentWindow;
@@ -57,10 +57,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       break;
 
     default:
-      if ($extension.style.height == '500px') {
+      if ($extension.style.height === '500px') {
         $extension.style.height = '24px';
       } else if ($extension.style.height = '24px') {
-        $extension.style.height = '500px'
+        $extension.style.height = '500px';
       }
       break;
   }
