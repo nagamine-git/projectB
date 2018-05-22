@@ -4,6 +4,8 @@
 // iframeの描画
 let $extension = this.$extension = document.createElement('iframe');
 $extension.id = 'prj_b_sidebar';
+$extension.scrolling = 'no';
+$extension.frameBorder = '0';
 $extension.src = chrome.extension.getURL('pages/sidebar.html');
 document.body.appendChild($extension); 
 
@@ -40,3 +42,8 @@ const sendIframeMessage = (response: any) => {
   const sidebar_iframe = $extension.contentWindow;
   if (sidebar_iframe) sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
 };
+
+chrome.runtime.onMessage.addListener(function(res, sender, sendResponse) { 
+  $extension.style.height = '1.6em';
+  sendResponse( {'response': true} );
+});
