@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener(
     let action = Object.keys(request)[0];
     if (action === 'active_switch') {
       active_flag = !active_flag;
-      active_flag ? chrome.browserAction.setIcon({path: '../images/icon-rec-19.png'}) : chrome.browserAction.setIcon({path: '../images/icon-19.png'});
+      active_flag ? chrome.browserAction.setIcon({path: '../images/icon-19.png'}) : chrome.browserAction.setIcon({path: '../images/icon-off-19.png'});
       sendResponse(active_flag);
       return;
     } else if (action === 'active_status') {
