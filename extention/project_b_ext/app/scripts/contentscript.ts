@@ -35,7 +35,6 @@ window.onload = () => {
   let current_location = location.href;
   if (last_location !== location.href) {
     last_location = location.href;
-    // background.jsに送信
     chrome.runtime.sendMessage({'アクセス': location.href}, sendIframeMessage);
   }
 };
@@ -46,8 +45,8 @@ const sendIframeMessage = (response: any) => {
 };
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  let action = Object.keys(request)[0];
-  switch (action) {
+  let command = Object.keys(request)[0];
+  switch (command) {
     case 'hide':
       $extension.style.display = 'none';
       break;
