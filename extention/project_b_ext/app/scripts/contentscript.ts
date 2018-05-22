@@ -43,7 +43,11 @@ const sendIframeMessage = (response: any) => {
   if (sidebar_iframe) sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
 };
 
-chrome.runtime.onMessage.addListener(function(res, sender, sendResponse) { 
-  $extension.style.height = '1.6em';
+chrome.runtime.onMessage.addListener(function(res, sender, sendResponse) {
+  if ($extension.style.height == '500px') {
+    $extension.style.height = '24px';
+  } else if ($extension.style.height = '24px') {
+    $extension.style.height = '500px'
+  }
   sendResponse( {'response': true} );
 });
