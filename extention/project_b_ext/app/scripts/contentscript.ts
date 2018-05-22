@@ -7,7 +7,9 @@ $extension.id = 'prj_b_sidebar';
 $extension.scrolling = 'no';
 $extension.frameBorder = '0';
 $extension.src = chrome.extension.getURL('pages/sidebar.html');
-document.body.appendChild($extension); 
+chrome.runtime.sendMessage({'active_status': true}, (res) => {
+  if(res) document.body.appendChild($extension);
+})
 
 document.addEventListener('mousedown', (e: any) => {
   // 末端のDOMの値を取得
@@ -43,11 +45,24 @@ const sendIframeMessage = (response: any) => {
   if (sidebar_iframe) sidebar_iframe.postMessage(response, chrome.extension.getURL('pages/sidebar.html'));
 };
 
-chrome.runtime.onMessage.addListener(function(res, sender, sendResponse) {
-  if ($extension.style.height == '500px') {
-    $extension.style.height = '24px';
-  } else if ($extension.style.height = '24px') {
-    $extension.style.height = '500px'
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  let action = Object.keys(request)[0];
+  switch (action) {
+    case 'hide':
+      $extension.style.display = 'none';
+      break;
+
+    case 'show':
+      $extension.style.display = 'block';
+      break;
+
+    default:
+      if ($extension.style.height == '500px') {
+        $extension.style.height = '24px';
+      } else if ($extension.style.height = '24px') {
+        $extension.style.height = '500px'
+      }
+      break;
   }
   sendResponse( {'response': true} );
 });

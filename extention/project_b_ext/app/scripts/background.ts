@@ -4,41 +4,53 @@
 // イベント一覧をactionsに保存しておく
 
 let actions = <any>[]
+let active_flag: boolean = true;
 
 chrome.runtime.onMessage.addListener(
   function(request,sender,sendResponse) {
     let action = Object.keys(request)[0];
-    switch (action) {
-      case 'deleteAll':
-        actions = [];
-        break;
+    if (action == 'active_switch') {
+      active_flag = !active_flag;
+      sendResponse(active_flag);
+      return
+    } else if (action == 'active_status') {
+      sendResponse(active_flag);
+      return
+    }
 
-      case 'delete':
-        actions.splice(request[action], 1);
-        break;
+    if (active_flag == true) {  
+      switch (action) {
+        case 'deleteAll':
+          actions = [];
+          break;
 
-      case 'copyAll':
-          let textArea = document.createElement("textarea");
-          textArea.style.cssText = "position:absolute;left:-100%";
-          document.body.appendChild(textArea);
-          let action_list_result = '';
-          let action_number = 0;
-          for (let action in actions) {
-            for (let key in actions[action]) {
-              if (key == 'クリック' || key == 'アクセス') {
-                action_list_result += key + ':\n'+ actions[action][key] + '\n\n'                
+        case 'delete':
+          actions.splice(request[action], 1);
+          break;
+
+        case 'copyAll':
+            let textArea = document.createElement("textarea");
+            textArea.style.cssText = "position:absolute;left:-100%";
+            document.body.appendChild(textArea);
+            let action_list_result = '';
+            let action_number = 0;
+            for (let action in actions) {
+              for (let key in actions[action]) {
+                if (key == 'クリック' || key == 'アクセス') {
+                  action_list_result += key + ':\n'+ actions[action][key] + '\n\n'                
+                }
               }
+              action_number ++;
             }
-            action_number ++;
-          }
-          textArea.value = action_list_result;
-          textArea.select();
-          document.execCommand("copy");
-          document.body.removeChild(textArea);
+            textArea.value = action_list_result;
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
 
-      default:
-        actions.push(request);
-        break;
+        default:
+          actions.push(request);
+          break;
+      }
     }
     sendResponse(actions);
   }
