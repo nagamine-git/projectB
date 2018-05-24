@@ -1,7 +1,7 @@
 {
-  "name": "__MSG_appName__",
-  "short_name": "__MSG_appShortName__",
-  "description": "__MSG_appDescription__",
+  "name": "PJTB",
+  "short_name": "PJTB",
+  "description": "自動マニュアル生成機能、PJTB",
   "version": "0.0.0",
   "manifest_version": 2,
   "default_locale": "en",
@@ -19,7 +19,7 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "__MSG_browserActionTitle__",
+    "default_title": "PJTB",
     "default_popup": "pages/popup.html"
   },
   "content_scripts": [
@@ -40,6 +40,11 @@
   ],
   "permissions": [
     "clipboardRead",
-    "clipboardWrite"
-  ]
+    "clipboardWrite",
+    "http://*/*", "https://*/*", "https://code.jquery.com/*", "https://cdnjs.cloudflare.com/*", "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+  ],
+  "web_accessible_resources": [
+    "pages/sidebar.html"
+  ],
+  "content_security_policy": "script-src 'self' https://code.jquery.com/ https://cdnjs.cloudflare.com/ https://stackpath.bootstrapcdn.com/; object-src 'self'"
 }

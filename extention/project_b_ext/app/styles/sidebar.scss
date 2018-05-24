@@ -1,0 +1,20 @@
+.pjt_b_header {
+    padding: 0 8px;
+}
+.pjt_b_header_mini {
+    cursor: pointer;
+    float: right;
+}
+.pjt_b_delete {
+    cursor: pointer;
+    float: right;
+    user-select: none;
+}
+#action_list {
+    height: 415px;
+    overflow: scroll;
+    word-break : break-all;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

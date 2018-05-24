@@ -50,6 +50,7 @@
     "gulp-tag-version": "1.x.x",
     "gulp-util": "3.x.x",
     "gulp-zip": "^4.x.x",
+    "hoek": "^4.2.1",
     "require-dir": "0.x.x",
     "standard": "^10.0.2",
     "ts-loader": "^2.x.x",
