@@ -14,6 +14,7 @@ chrome.runtime.onMessage.addListener(
       sendResponse(active_flag);
       return;
     } else if (command === 'active_status') {
+      active_flag ? chrome.browserAction.setIcon({path: '../images/icon-19.png'}) : chrome.browserAction.setIcon({path: '../images/icon-off-19.png'});
       sendResponse(active_flag);
       return;
     }
