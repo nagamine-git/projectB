@@ -19,7 +19,7 @@
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
-    "default_title": "自動マニュアル生成機能、PJTB",
+    "default_title": "PJTB",
     "default_popup": "pages/popup.html"
   },
   "content_scripts": [
