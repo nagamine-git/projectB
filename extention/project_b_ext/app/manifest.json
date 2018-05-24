@@ -2,7 +2,7 @@
   "name": "PJTB",
   "short_name": "PJTB",
   "description": "自動マニュアル生成機能、PJTB",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "manifest_version": 2,
   "default_locale": "en",
   "icons": {
